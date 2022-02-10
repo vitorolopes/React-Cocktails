@@ -1,0 +1,27 @@
+External API endpoints
+  https://www.thecocktaildb.com/api/json/v1/1/search.php?f=a
+  https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=11007
+
+Files in src
+  App
+  index
+  context
+
+Routes
+  Home
+  About
+  Error
+  SingleCocktail
+
+Components
+ Home *
+  Navbar
+  CocktailList
+    SearchForm
+    Loading
+    Cocktail
+	SingleCocktail *
+ About *
+ Error *
+
+
