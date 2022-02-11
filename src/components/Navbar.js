@@ -1,12 +1,9 @@
 import React from 'react'
 import {Link} from 'react-router-dom'
 
-import { useGlobalContext } from '../context'
 import logo from '../logo.svg'
 
 const Navbar = () => {
-
-  const {test} = useGlobalContext()
 
   return (
     <nav className='navbar'>

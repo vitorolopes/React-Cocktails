@@ -1,8 +1,17 @@
 import React from 'react'
 
-const SingleCocktail = () => {
+const SingleCocktail = ({strDrinkThumb, strDrink, strAlcoholic, strGlass}) => {
   return (
-    <div>SingleCocktail</div>
+    <div className='cocktail'>
+      <img src={strDrinkThumb} alt={strDrink} />
+      <div className="cocktail-footer">
+        <h3>{strDrink}</h3>
+        <h4>{strGlass}</h4>
+        <p>{strAlcoholic}</p>
+        <button className='btn btn-primary'>details</button>
+      </div>
+      
+    </div>
   )
 }
 

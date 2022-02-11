@@ -1,14 +1,31 @@
-import React, { useContext } from 'react'
+import React, { useContext, useState, useEffect } from 'react'
 
 const AppContext = React.createContext()
 
+const base_Url = "https://www.thecocktaildb.com/api/json/v1/1/"
+const search_Url = "search.php?f=a"
+const details_Url = "lookup.php?i=11007"
+
 const AppProvider = ({children}) => {
 
-    const test = "Hello"
+   const [searchTerm, setSearchTerm] = useState("");
+   const [cocktails, setCocktails] = useState([])
+
+   const fetchData = async () => {
+    const res = await fetch(`${base_Url}${search_Url}`);
+    const data = await res.json()
+    console.log(data);
+    setCocktails(data.drinks)
+   }
+
+   useEffect(() => {
+    fetchData() 
+   }, [])
+    
     
     return(
         <AppContext.Provider value={
-                            { test   }
+                            { cocktails }
         }>
             {children}
         </AppContext.Provider>
