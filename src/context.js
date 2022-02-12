@@ -2,34 +2,47 @@ import React, { useContext, useState, useEffect } from 'react'
 
 const AppContext = React.createContext()
 
-const base_Url = "https://www.thecocktaildb.com/api/json/v1/1/"
-const search_Url = "search.php?f=a"
+// const base_Url = "https://www.thecocktaildb.com/api/json/v1/1/search.php?f="
+const base_Url = "https://www.thecocktaildb.com/api/json/v1/1/search.php?s="
 const details_Url = "lookup.php?i=11007"
 
 const AppProvider = ({children}) => {
 
    const [searchTerm, setSearchTerm] = useState("");
    const [cocktails, setCocktails] = useState([])
+   const [loading, setLoading] = useState(false)
 
    const fetchData = async () => {
-    const res = await fetch(`${base_Url}${search_Url}`);
+    let url
+    if(searchTerm === ""){
+        url = `${base_Url}a`
+    } else {
+        url = `${base_Url}${searchTerm}`
+    }
+    
+    setLoading(true)
+    const res = await fetch(`${url}`);
     const data = await res.json()
     console.log(data);
     setCocktails(data.drinks)
+    setLoading(false)
    }
 
    useEffect(() => {
     fetchData() 
-   }, [])
+   }, [searchTerm])
     
-    
-    return(
+   return(
         <AppContext.Provider value={
-                            { cocktails }
+                            { cocktails,
+                              loading,
+                              searchTerm,
+                              setSearchTerm
+                            }
         }>
             {children}
         </AppContext.Provider>
-    ) 
+   ) 
 } 
 
 export const useGlobalContext = () => {
