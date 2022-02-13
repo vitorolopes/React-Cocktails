@@ -1,6 +1,6 @@
 import React from 'react'
 import { useGlobalContext } from '../context'
-import SingleCocktail from '../pages/SingleCocktail'
+import Cocktail from './Cocktail'
 
 import Loading from './Loading'
 
@@ -26,7 +26,7 @@ const CocktailList = () => {
       <div className="cocktails-center">
           {
           cocktails.map( cocktail => {
-            return  <SingleCocktail key={cocktail.idDrink} {...cocktail}/>
+            return  <Cocktail key={cocktail.idDrink} {...cocktail}/>
           })
           } 
       </div>

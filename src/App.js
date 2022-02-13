@@ -3,7 +3,7 @@ import React, { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
 import Navbar from './components/Navbar'
 import Home from './pages/Home'
 import About from './pages/About'
-import SingleCocktail from './pages/SingleCocktail'
+import CocktailDetails from './pages/CocktailDetails'
 import Error from './pages/Error'
 
 function App() {
@@ -18,7 +18,7 @@ function App() {
 
           <Route path="/about" element= { <About/> } />
              
-          <Route path="/cocktail/:id" element={ <SingleCocktail/> } />
+          <Route path="/cocktail/:id" element={ <CocktailDetails/> } />
 
           <Route path="*" element={ <Error /> } />
 

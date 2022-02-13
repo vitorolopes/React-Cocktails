@@ -21,9 +21,9 @@ const AppProvider = ({children}) => {
     }
     
     setLoading(true)
-    const res = await fetch(`${url}`);
+    const res = await fetch(url);
     const data = await res.json()
-    console.log(data);
+   // console.log(data);
     setCocktails(data.drinks)
     setLoading(false)
    }
