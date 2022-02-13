@@ -8,8 +8,6 @@ const CocktailList = () => {
 
   const {cocktails, loading} = useGlobalContext()
 
-  // console.log(cocktails.length);
-
   if(loading) return <Loading/>
 
   if(cocktails === null){

@@ -1,15 +1,13 @@
 import React, { useState, useEffect} from 'react'
 import { useParams, Link } from 'react-router-dom'
+import Loading from '../components/Loading';
 
-const base_Url = "https://www.thecocktaildb.com/api/json/v1/1/search.php?s="
 const details_Url = "https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i="
 
 const CocktailDetails = () => {
-
-    console.log(useParams());
     const {id} = useParams()
 
-    const [identifier, setIdentifier] = useState(id)
+    const [loading, setLoading] = useState(false)
     const [cocktailDetails, setCocktailDetails] = useState([])
 
     const url = `${details_Url}${id}`
@@ -17,20 +15,32 @@ const CocktailDetails = () => {
     const {strDrink:name, strDrinkThumb:image, strAlcoholic: info,
            strCategory:category,strGlass:glass, strInstructions:instructions,
            strIngredient1,strIngredient2,strIngredient3,strIngredient4,strIngredient5} = cocktailDetails
-
     const ingredients = [strIngredient1,strIngredient2,strIngredient3,strIngredient4,strIngredient5]
 
-
     const fetchData = async () => {
-        const res = await fetch(url)
-        const data = await res.json()
-        console.log(data.drinks[0]);
-        setCocktailDetails(data.drinks[0])
+        try {
+            const res = await fetch(url)
+            const data = await res.json()
+            console.log(data.drinks[0]);
+            if(data.drinks){
+                setCocktailDetails(data.drinks[0])
+            } else{
+                setCocktailDetails(null)
+            }
+        } catch (error) {
+            console.log(error);
+        }
     }
 
     useEffect(() => {
-    fetchData() 
+        setLoading(true)
+        fetchData() 
+        setLoading(false)
     }, [id])
+
+
+    if(loading) return <Loading/>
+    if(!cocktailDetails) return <h2 className='section-title'>no cocktail to display</h2>
 
     return (
     <section className='section cocktail-section'>
@@ -50,6 +60,9 @@ const CocktailDetails = () => {
               </p>
               <p>
                 <span className="drink-data">instructions:</span> {instructions}
+              </p>
+              <p>
+                <span className="drink-data">glass:</span> {glass}
               </p>
               <p>
                 <span className="drink-data">ingredients:</span> 

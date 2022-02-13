@@ -7,7 +7,6 @@ const SearchForm = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault()
-    console.log(e.target.value);
   }
 
   return (

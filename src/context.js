@@ -2,7 +2,6 @@ import React, { useContext, useState, useEffect } from 'react'
 
 const AppContext = React.createContext()
 
-// const base_Url = "https://www.thecocktaildb.com/api/json/v1/1/search.php?f="
 const base_Url = "https://www.thecocktaildb.com/api/json/v1/1/search.php?s="
 const details_Url = "lookup.php?i=11007"
 
@@ -23,7 +22,6 @@ const AppProvider = ({children}) => {
     setLoading(true)
     const res = await fetch(url);
     const data = await res.json()
-   // console.log(data);
     setCocktails(data.drinks)
     setLoading(false)
    }
